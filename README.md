@@ -1,2 +1,2 @@
-# srms
-School Result Management System
+# vimmak-dashboard
+Users dashboard

@@ -1,0 +1,12 @@
+.push-margin-down{
+  margin-top:60px;
+}
+.img-circle.profile-logo{
+    width: 20%;
+    background: #fff;
+    margin-left: 5%;
+    z-index: 1000;
+    position: inherit;
+    border: 1px solid rgba(52,73,94,.44);
+    padding: 4px;
+}
