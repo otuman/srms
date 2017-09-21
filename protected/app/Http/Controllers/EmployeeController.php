@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class AffiliateController extends Controller
+class EmployeeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,7 @@ class AffiliateController extends Controller
      */
     public function index()
     {
-        return view('pages.affiliates.index');
+        //
     }
 
     /**

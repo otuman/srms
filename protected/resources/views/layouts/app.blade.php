@@ -9,7 +9,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Jerotoma') }} | @yield('title')</title>
+    <title>{{ config('app.name', 'SRMS') }} | @yield('title')</title>
     <link rel="icon" href="{{ asset('protected/storage/uploads/images/prod-1.jpg') }}">
       <!-- Bootstrap -->
     <link href="{{ asset('protected/resources/assets/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
