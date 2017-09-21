@@ -39,12 +39,12 @@
       <div class="main_container">
          <!-- Left Navigation-->
       <div class="col-md-3 left_col">
-         @include('layouts.left-navigation');
+         @include('layouts.left-navigation')
      </div>
       <!-- Top Navigation-->
     <div class="top_nav navbar-fixed-top">
         <div class="nav_menu">
-           @include('layouts.top-navigation');
+           @include('layouts.top-navigation')
         </div>
     </div>
      <!-- page content -->

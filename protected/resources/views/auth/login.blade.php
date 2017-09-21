@@ -29,7 +29,7 @@
                         {{ csrf_field() }}
                         <div class="form-group">
                            <div class="col-md-4 col-md-offset-4">
-                             <img class="profile-img" src="{{ asset('protected/storage/uploads/images/logo-brand.png') }}" alt=""> <!-- https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120 -->
+                             <img class="profile-img" src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120" alt=""> <!--{{ asset('protected/storage/uploads/images/logo-brand.png') }}  -->
                            </div>
                         </div>
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">

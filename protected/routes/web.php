@@ -25,8 +25,7 @@ Route::prefix('home')->group(function(){
 
 Route::prefix('users')->group(function(){
     Route::get('/', 'UserController@index')->name('users');
-     Route::get('/', 'UserController@getUsersData')->name('users-data');
-
+    Route::get('/', 'UserController@getUsersData')->name('users-data');
     Route::get('/create', 'UserController@index')->name('users/create');
     Route::get('/members', 'UserController@index')->name('users/members');
     Route::get('/merchants', 'UserController@index')->name('users/merchants');
