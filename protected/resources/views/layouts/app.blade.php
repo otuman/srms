@@ -26,7 +26,11 @@
     <link href="{{ asset('protected/resources/assets/vendors/jqvmap/dist/jqvmap.min.css') }}" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
     <link href="{{ asset('protected/resources/assets/vendors/bootstrap-daterangepicker/daterangepicker.css') }}" rel="stylesheet">
-
+    <!-- bootstrap-daterangepicker -->
+    <link href="{{ asset('protected/resources/assets/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css') }}" rel="stylesheet">
+    <link href="https://cdn.datatables.net/buttons/1.4.2/css/buttons.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/select/1.2.3/css/select.dataTables.min.css" rel="stylesheet">
+    <link href="https://editor.datatables.net/extensions/Editor/css/editor.dataTables.min.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="{{ asset('protected/resources/assets/build/css/custom.min.css') }}" rel="stylesheet">
     <!-- Jerotoma Admin css -->
@@ -39,12 +43,12 @@
       <div class="main_container">
          <!-- Left Navigation-->
       <div class="col-md-3 left_col">
-         @include('layouts.left-navigation')
+         @include('layouts.left-navigation');
      </div>
       <!-- Top Navigation-->
     <div class="top_nav navbar-fixed-top">
         <div class="nav_menu">
-           @include('layouts.top-navigation')
+           @include('layouts.top-navigation');
         </div>
     </div>
      <!-- page content -->
@@ -72,6 +76,13 @@
     <script src="{{ asset('protected/resources/assets/vendors/iCheck/icheck.min.js') }}"></script>
     <!-- Skycons -->
     <script src="{{ asset('protected/resources/assets/vendors/skycons/skycons.js') }}"></script>
+    <!-- Datatables.js -->
+    <script src="{{ asset('protected/resources/assets/vendors/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('protected/resources/assets/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
+    <!--<script src="{{ asset('protected/resources/assets/vendors/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script> -->
+    <!--<script src="https://cdn.datatables.net/select/1.2.3/js/dataTables.select.min.js"></script> -->
+    <!--<script src="{{ asset('protected/resources/assets/vendors/datatables.net/js/dataTables.editor.min.js') }}"></script> -->
+
     <!-- Flot -->
     <script src="{{ asset('protected/resources/assets/vendors/Flot/jquery.flot.js') }}"></script>
     <script src="{{ asset('protected/resources/assets/vendors/Flot/jquery.flot.pie.js') }}"></script>
