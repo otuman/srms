@@ -1,2 +1,2 @@
-# vimmak-dashboard
+# srms-dashboard
 Users dashboard
