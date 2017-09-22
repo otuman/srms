@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use Yajra\DataTables\Facades\DataTables;
-
+use Auth;
 class UserController extends Controller{
     /**
      * Display a listing of the resource.
@@ -49,14 +49,23 @@ class UserController extends Controller{
         //
     }
 
+     /**
+      * Show the form for editing the specified resource.
+      *
+      * @param  int  $id
+      * @return \Illuminate\Http\Response
+      */
+     public function editProfile(){
+        $user = Auth::user();
+        return view('pages.users.profile', compact('user'));
+     }
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id){
        $user = User::find($id);
        return view('pages.users.edit', compact('user'));
     }
@@ -68,9 +77,13 @@ class UserController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(Request $request, $id){
+
+        $user = User::find($id);
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->save();
+     return view('pages.users.index');
     }
 
     /**
@@ -79,11 +92,9 @@ class UserController extends Controller{
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
+    public function destroy($id){
 
+    }
     /**
      * Process datatables ajax request.
      *
