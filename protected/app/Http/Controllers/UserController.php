@@ -24,7 +24,7 @@ class UserController extends Controller{
      */
     public function create()
     {
-        //
+       return view('pages.users.create');
     }
 
     /**
@@ -57,7 +57,8 @@ class UserController extends Controller{
      */
     public function edit($id)
     {
-        //
+       $user = User::find($id);
+       return view('pages.users.edit', compact('user'));
     }
 
     /**
@@ -89,7 +90,12 @@ class UserController extends Controller{
      * @return \Illuminate\Http\JsonResponse
      */
     public function getUsersData(){
-        return Datatables::of(User::query())->make(true);
+       $users = User::query();
+        return Datatables::of($users)
+               ->addColumn('action', function ($user) {
+                  return '<a href="{{url('user/edit')}}/'.$user->id.'" class="btn btn-xs btn-default"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>';
+                })
+             ->make(true);
     }
 
 }

@@ -1,13 +1,8 @@
 @extends('layouts.app')
-
 @section('title')
-
-Posts
-
+Users
 @endsection
-
 @section('content')
-
           <!-- page content -->
 
     <div class="row tile_count push-margin-down" id="app">
@@ -20,10 +15,10 @@ Posts
               <div class="clearfix"></div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
+                   <button type="button" class="btn btn-info btn-sm pull-right" data-toggle="modal" data-target="#add-new-user">Add New</button>
                   <div class="x_content">
-                    <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#add-new-user">Add New</button>
-                    <div class="table-responsive">
-                      <table class="table table-bordered" id="users-table">
+                     <div class="table-responsive">
+                      <table class="table table-bordered hover" id="users-table" cellspacing="0" width="100%">
                           <thead>
                               <tr>
                                   <th>Id</th>
@@ -32,8 +27,20 @@ Posts
                                   <th>Email</th>
                                   <th>Status</th>
                                   <th>Last Login</th>
+                                  <th>Action</th>
                               </tr>
                           </thead>
+                          <tfoot>
+                              <tr>
+                                  <th>Id</th>
+                                  <th>First Name</th>
+                                  <th>Last Name</th>
+                                  <th>Email</th>
+                                  <th>Status</th>
+                                  <th>Last Login</th>
+                                  <th>Action</th>
+                              </tr>
+                          </tfoot>
                       </table>
                     </div>
                   </div>
@@ -48,23 +55,13 @@ Posts
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
+                    <h4 class="modal-title">Add New User</h4>
                   </div>
                   <div class="modal-body">
-                   <form>
-                      <div class="form-group">
-                        <label for="email">Email address:</label>
-                        <input type="email" class="form-control" id="email">
-                      </div>
-                      <div class="form-group">
-                        <label for="pwd">Password:</label>
-                        <input type="password" class="form-control" id="pwd">
-                      </div>
-                      <div class="checkbox">
-                        <label><input type="checkbox"> Remember me</label>
-                      </div>
-                      <button type="submit" class="btn btn-default">Submit</button>
-                    </form>
+                     <form class="" method="POST" action="{{ route('register') }}">
+                         {{ csrf_field() }}
+                         @include('pages.users.add_new_user_form')
+                     </form>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -78,9 +75,10 @@ Posts
 @endsection
 @section('page-script') <!-- Custom Theme Scripts -->
     <script>
-       var editor; // use a global for the submit and return data rendering in the examples
-        $(document).ready(function() {
-            $('#users-table').DataTable({
+       $(document).ready(function() {
+
+         let usersTables = $('#users-table');
+             usersTables.DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: '{{route("users-data") }}',
@@ -90,7 +88,8 @@ Posts
                     { data: 'last_name', name: 'last_name' },
                     { data: 'email', name: 'email' },
                     { data: 'status', name: 'status' },
-                    { data: 'last_login', name: 'last_login' }
+                    { data: 'last_login', name: 'last_login' },
+                    {data: 'action', name: 'action', orderable: false, searchable: false}
                 ]
             });
         });

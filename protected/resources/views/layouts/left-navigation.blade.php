@@ -37,7 +37,7 @@
           <li><a><i class="fa fa-users" aria-hidden="true"></i> Users <span class="fa fa-chevron-down"></span></a>
             <ul class="nav child_menu">
               <li><a href="{{url('users')}}">All users</a></li>
-              <li><a href="{{url('users/create')}}">Add new</a></li>
+              <li><a href="{{route('users/create')}}">Add new</a></li>
             </ul>
           </li>
           <li><a><i class="fa fa-bar-chart-o"></i> Courses <span class="fa fa-chevron-down"></span></a>

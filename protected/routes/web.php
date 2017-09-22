@@ -26,7 +26,8 @@ Route::prefix('home')->group(function(){
 Route::prefix('users')->group(function(){
     Route::get('/', 'UserController@index')->name('users');
     Route::get('/users-data', 'UserController@getUsersData')->name('users-data');
-    Route::get('/create', 'UserController@index')->name('users/create');
+    Route::get('/create', 'UserController@create')->name('users/create');
+    Route::get('/edit/{id}', 'UserController@edit')->name('users/edit');
 });
 
 Route::prefix('courses')->group(function(){
