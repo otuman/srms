@@ -93,7 +93,7 @@ class UserController extends Controller{
        $users = User::query();
         return Datatables::of($users)
                ->addColumn('action', function ($user) {
-                  return '<a href="{{url('user/edit')}}/'.$user->id.'" class="btn btn-xs btn-default"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>';
+                  return '<a href="'.url('user/edit').'/'.$user->id.'" class="btn btn-xs btn-default"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>';
                 })
              ->make(true);
     }
