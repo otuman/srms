@@ -46,7 +46,8 @@ class UserController extends Controller{
      */
     public function show($id)
     {
-        //
+       $user = User::find($id);
+       return view('pages.users.edit', compact('user'));
     }
 
      /**
@@ -83,7 +84,7 @@ class UserController extends Controller{
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->save();
-     return view('pages.users.index');
+     return redirect()->route('users');
     }
 
     /**
