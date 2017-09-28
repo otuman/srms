@@ -25,6 +25,7 @@ Route::prefix('users')->group(function(){
     Route::get('/', 'UserController@index')->name('users');
     Route::get('/users-data', 'UserController@getUsersData')->name('users-data');
     Route::get('/create', 'UserController@create')->name('users/create');
+    Route::get('/show/{id}', 'UserController@show')->name('users/show');
     Route::get('/edit/{id}', 'UserController@edit')->name('users/edit');
     Route::get('users/profile', 'UserController@editProfile')->name('users/profile');
     Route::post('/edit/{id}', 'UserController@update')->name('users/edit');
@@ -35,4 +36,12 @@ Route::prefix('courses')->group(function(){
     Route::get('/create', 'CourseController@index')->name('courses/create');
     Route::get('/enroll', 'CourseController@index')->name('courses/enroll');
     Route::get('/enroll', 'CourseController@index')->name('courses/enroll');
+});
+
+
+Route::prefix('classes')->group(function(){
+    Route::get('/', 'ClassController@index')->name('classes');
+    Route::get('/create', 'ClassController@index')->name('classes/create');
+    Route::get('/show/{id}', 'ClassController@index')->name('classes/show');
+    Route::get('/edit/{id}', 'ClassController@index')->name('classes/eidt');
 });

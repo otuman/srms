@@ -1,7 +1,6 @@
 
   <!-- This is the register new user form -->
-
-          <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
+         <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
            <label for="first_name">First Name:</label>
            <input type="text" class="form-control" name="first_name" id="first_name" value="{{ old('first_name') }}" required autofocus>
             @if ($errors->has('first_name'))
@@ -19,15 +18,29 @@
                 </span>
             @endif
          </div>
-        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-         <label for="email">E-Mail Address</label>
-             <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
-             @if ($errors->has('email'))
-                 <span class="help-block">
-                     <strong>{{ $errors->first('email') }}</strong>
-                 </span>
-             @endif
+        <div class="form-group{{ $errors->has('user_type') ? ' has-error' : '' }}">
+          <label for="user_type">Select User Type:</label>
+          <select class="form-control" name="user_type" id="user_type" required>
+            <option value="" ></option>
+            <option value="student" >Student</option>
+            <option value="employee" >Employee</option>
+            <option value="admin" >Admin</option>
+          </select>
+          @if ($errors->has('user_type'))
+               <span class="help-block">
+                   <strong>{{ $errors->first('user_type') }}</strong>
+               </span>
+           @endif
        </div>
+      <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+       <label for="email">E-Mail Address</label>
+           <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+           @if ($errors->has('email'))
+               <span class="help-block">
+                   <strong>{{ $errors->first('email') }}</strong>
+               </span>
+           @endif
+     </div>
        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
          <label for="password" >Password</label>
             <input id="password" type="password" class="form-control" name="password" required>

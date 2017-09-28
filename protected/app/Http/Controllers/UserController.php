@@ -6,7 +6,21 @@ use Illuminate\Http\Request;
 use App\User;
 use Yajra\DataTables\Facades\DataTables;
 use Auth;
+
+
 class UserController extends Controller{
+
+
+     /**
+      * Create a new controller instance.
+      *
+      * @return void
+      */
+     public function __construct()
+     {
+         $this->middleware('auth');
+     }
+
     /**
      * Display a listing of the resource.
      *
@@ -38,18 +52,6 @@ class UserController extends Controller{
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-       $user = User::find($id);
-       return view('pages.users.edit', compact('user'));
-    }
-
      /**
       * Show the form for editing the specified resource.
       *
@@ -69,6 +71,17 @@ class UserController extends Controller{
     public function edit($id){
        $user = User::find($id);
        return view('pages.users.edit', compact('user'));
+    }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+       $user = User::find($id);
+       return view('pages.users.show', compact('user'));
     }
 
     /**

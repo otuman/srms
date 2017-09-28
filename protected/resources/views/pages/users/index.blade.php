@@ -25,6 +25,7 @@ Users
                                   <th>First Name</th>
                                   <th>Last Name</th>
                                   <th>Email</th>
+                                  <th>Type</th>
                                   <th>Status</th>
                                   <th>Last Login</th>
                                   <th>Action</th>
@@ -36,6 +37,7 @@ Users
                                   <th>First Name</th>
                                   <th>Last Name</th>
                                   <th>Email</th>
+                                  <th>Type</th>
                                   <th>Status</th>
                                   <th>Last Login</th>
                                   <th>Action</th>
@@ -87,6 +89,7 @@ Users
                     { data: 'first_name', name: 'first_name' },
                     { data: 'last_name', name: 'last_name' },
                     { data: 'email', name: 'email' },
+                    { data: 'type', name: 'type' },
                     { data: 'status', name: 'status' },
                     { data: 'last_login', name: 'last_login' },
                     {data: 'action', name: 'action', orderable: false, searchable: false}

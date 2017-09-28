@@ -65,8 +65,8 @@
           </li>
            <li><a><i class="fa fa-edit"></i> Classes <span class="fa fa-chevron-down"></span></a>
              <ul class="nav child_menu">
-               <li><a href="{{url('students')}}">All Classes</a></li>
-               <li><a href="form_advanced.html">Add new</a></li>
+               <li><a href="{{url('classes')}}">All Classes</a></li>
+               <li><a href="{{url('classes/create')}}">Add new</a></li>
              </ul>
            </li>
           <li><a><i class="fa fa-table"></i> Media <span class="fa fa-chevron-down"></span></a>
