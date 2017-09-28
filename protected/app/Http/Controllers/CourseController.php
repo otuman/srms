@@ -25,7 +25,7 @@ class CourseController extends Controller
      */
     public function index()
     {
-        return view('pages.affiliates.index');
+        return view('pages.courses.index');
     }
 
     /**
