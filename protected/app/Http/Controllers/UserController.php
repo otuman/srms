@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Request as DataRequest;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use App\User;
 use Yajra\DataTables\Facades\DataTables;
 use Auth;
@@ -70,6 +72,16 @@ class UserController extends Controller{
      */
     public function edit($id){
        $user = User::find($id);
+       if(DataRequest::ajax()){
+
+        $response = response()->json([
+               'first_name' => $user->first_name,
+               'last_name' => $user->last_name,
+               'email' => $user->email,
+               'id' => $user->id
+             ]);
+         return $response;
+       }
        return view('pages.users.edit', compact('user'));
     }
     /**
@@ -97,6 +109,12 @@ class UserController extends Controller{
         $user->first_name = $request->first_name;
         $user->last_name = $request->last_name;
         $user->save();
+
+        if ($request->ajax()) {
+        return response()->json([
+                'sucess' => true,
+              ]);
+        }
      return redirect()->route('users');
     }
 
@@ -107,7 +125,8 @@ class UserController extends Controller{
      * @return \Illuminate\Http\Response
      */
     public function destroy($id){
-
+          $user = User::find($id);
+          $user->delete();
     }
     /**
      * Process datatables ajax request.
@@ -118,7 +137,8 @@ class UserController extends Controller{
        $users = User::query();
         return Datatables::of($users)
                ->addColumn('action', function ($user) {
-                  return '<a href="'.url('users/edit').'/'.$user->id.'" class="btn btn-xs btn-default"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>';
+                  return '<a href="javascript:void(0)" onclick="editRow('.$user->id.')" class="btn btn-xs btn-success"><i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+                         <a href="javascript:void(0)" data-id="row-' . $user->id . '" onclick="removeRow('.$user->id.')" class="btn btn-xs btn-danger"><i class="fa fa-trash" aria-hidden="true"></i> delete</a>';
                 })
              ->make(true);
     }

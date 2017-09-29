@@ -54,4 +54,4 @@
          <label for="password-confirm">Confirm Password</label>
             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
      </div>
-     <button type="submit" class="btn btn-default">Submit</button>
+    

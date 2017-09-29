@@ -11,7 +11,8 @@ Register
                 <div class="panel-body">
                   <form class="" method="POST" action="{{ route('register') }}">
                       {{ csrf_field() }}
-                      @include('pages.users.add_new_user_form')
+                      @include('pages.users.add-new-user-form')
+                      <button type="submit" class="btn btn-success">Create</button>
                   </form>
                 </div>
             </div>
