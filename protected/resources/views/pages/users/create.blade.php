@@ -9,9 +9,9 @@ Register
             <div class="panel panel-default">
                 <div class="panel-heading">Add New User</div>
                 <div class="panel-body">
-                  <form class="" method="POST" action="{{ route('register') }}">
+                  <form class="" method="POST" action="{{ route('users/create') }}">
                       {{ csrf_field() }}
-                      @include('pages.users.add-new-user-form')
+                       @include('pages.users.add-new-user-form')
                       <button type="submit" class="btn btn-success">Create</button>
                   </form>
                 </div>

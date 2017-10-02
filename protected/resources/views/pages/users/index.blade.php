@@ -15,7 +15,7 @@ Users
               <div class="clearfix"></div>
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
-                   <button type="button" class="btn btn-info btn-sm pull-right" data-toggle="modal" data-target="#add-new-user">Add New</button>
+                   <button type="button" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#add-new-user">Add New</button>
                   <div class="x_content">
                      <div class="table-responsive">
                       <table class="table table-bordered hover" id="users-table" cellspacing="0" width="100%">
@@ -51,11 +51,34 @@ Users
            </div>
            <!-- -->
            <!-- Modal -->
+              <div id="delete-user-modal" class="modal fade" role="dialog">
+                <div class="modal-dialog modal-sm">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">Delete User</h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>You are about to Delete</p>
+                      <h3 id="user-to-delete"></h3>
+                      <p>Do you still want to delete?</p>
+                      <input type="hidden" class="form-control" name="deleted_user_id" id="deleted-user-id" value="" required autofocus>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-info" data-dismiss="modal">No, Thank you</button>
+                      <button type="submit" id="delete-btn-submit" class="btn btn-danger">Yes</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+           <!-- Modal -->
             <div id="add-new-user" class="modal fade" role="dialog">
               <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
-                  <form class="" method="POST" action="{{ route('register') }}">
+                  <form class="" method="POST" action="{{ route('register') }}" id="add-user-form">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Add New User</h4>
@@ -129,55 +152,104 @@ Users
           let user_id = $('#edit-id').val();
           let postData = $('#edit-user-form').serializeArray();
            $.ajax({
-            url : '{{url("users/edit")}}/' + user_id,
-            type: 'POST',
-            data: postData,
-            dataType: 'json',
-            success: function(data){
-                      console.log(status);
-          						$('#edit-user-modal').modal('hide');
-                      tableData.ajax.reload();
+                    url : '{{url("users/edit")}}/' + user_id,
+                    type: 'POST',
+                    data: postData,
+                    dataType: 'json',
+                    success: function(data){
+                              console.log(data);
+                  						$('#edit-user-modal').modal('hide');
+                              tableData.ajax.reload();
                     },
-            error:function() {
-                   alert('Unable to save data, please try again later.');
+                    error:function() {
+                           alert('Unable to save data, please try again later.');
                   }
           });
-
-
           event.preventDefault();
         });
 
+        // Save edited row $(selector).post(URL,data,function(data,status,xhr),dataType)
+			  $("#add-user-form").on("submit", function(event) {
+           let postData = $('#add-user-form').serializeArray();
+           $.ajax({
+                    url : '{{route("users/create")}}',
+                    type: 'POST',
+                    data: postData,
+                    dataType: 'json',
+                    success:function(data){
+                         console.log(data);
+                  			 $('#add-new-user').modal('hide');
+                         tableData.ajax.reload();
+                    },
+                    error:function(jqXHR,textStatus,errorThrown ){
+                          alert('Unable to create new user, please try again later.');
+                         //console.log(textStatus);
+                         //console.log(errorThrown);
+                    }
+          });
+          event.preventDefault();
+        });
+
+         // Save edited row $(selector).post(URL,data,function(data,status,xhr),dataType)
+ 			  $("#delete-btn-submit").on("click", function(event) {
+               var user_id = $('#deleted-user-id').val();
+               //console.log(user_id);
+               deleteUser(user_id);
+           });
+        function deleteUser(id){
+            $.get('{{url("users/delete")}}/' + id, function() {
+              $('a[data-id="row-' + id + '"]').parent().parent().remove();
+              $('#delete-user-modal').modal('hide');
+              tableData.ajax.reload();
+            }).fail(function() { alert('Unable to fetch data, please try again later.') });
+         }
+
     });
 
-           // Edit row
-        function editRow(id) {
-            if ( 'undefined' != typeof id ) {
-              $.getJSON(
-                    '{{url("users/edit")}}/'+ id,
-                     function(obj) {
-                        //console.log(obj);
-                        $('#edit-id').val(obj.id);
-                        $('#edit-first_name').val(obj.first_name);
-                        $('#edit-last_name').val(obj.last_name);
-                        $('#edit-email').val(obj.email);
-                        $('#edit-user-modal').modal('show');
-                     })
-                     .fail(function() {
-                       alert('Unable to fetch data, please try again later.')
-                     });
-            }else{
-               alert('Unknown row id.');
-            }
+  // Launch Edit row
+  function editRow(id) {
+      if ( 'undefined' != typeof id ) {
+        $.getJSON(
+              '{{url("users/edit")}}/'+ id,
+               function(obj) {
+                  console.log(obj);
+                  $('#edit-id').val(obj.id);
+                  $('#edit-first_name').val(obj.first_name);
+                  $('#edit-last_name').val(obj.last_name);
+                  $('#edit-email').val(obj.email);
+                  $('#user_type').val(obj.type);
+                  $('#edit-user-modal').modal('show');
+               })
+               .fail(function() {
+                 alert('Unable to fetch data, please try again later.')
+               });
+      }else{
+         alert('Unknown row id.');
+      }
+    }
+    // Remove row
+    function removeRow(id) {
+      if ( 'undefined' != typeof id ) {
 
-          }
-          // Remove row
-          function removeRow(id) {
-            if ( 'undefined' != typeof id ) {
-              $.get('{{url("users/delete")}}/' + id, function() {
-                $('a[data-id="row-' + id + '"]').parent().parent().remove();
-                tableData.ajax.reload();
-              }).fail(function() { alert('Unable to fetch data, please try again later.') });
-            } else alert('Unknown row id.');
-          }
+         $.getJSON(
+               '{{url("users/edit")}}/'+ id,
+                function(obj) {
+                   console.log(obj);
+                   $('#deleted-user-id').val(obj.id);
+                   $('#user-to-delete').html(obj.first_name +' '+obj.last_name);
+                   $('#delete-user-modal').modal('show');
+                })
+                .fail(function() {
+                  alert('Unable to fetch data, please try again later.')
+                });
+
+
+
+
+
+      } else alert('Unknown row id.');
+    }
+
+
 </script>
 @endsection

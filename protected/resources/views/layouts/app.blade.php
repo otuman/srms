@@ -34,7 +34,7 @@
     <!-- Custom Theme Style -->
     <link href="{{ asset('protected/resources/assets/build/css/custom.min.css') }}" rel="stylesheet">
     <!-- Jerotoma Admin css -->
-  <link href="{{ asset('/css/vimmak-admin.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/css/vimmak-admin.min.css') }}" rel="stylesheet">
      @yield('style-script')
   </head>
 

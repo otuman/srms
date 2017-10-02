@@ -25,11 +25,13 @@ Route::prefix('users')->group(function(){
     Route::get('/', 'UserController@index')->name('users');
     Route::get('/users-data', 'UserController@getUsersData')->name('users-data');
     Route::get('/create', 'UserController@create')->name('users/create');
-    Route::get('/show/{id}', 'UserController@show')->name('users/show');
+    Route::post('/create', 'UserController@store')->name('users/create');
     Route::get('/edit/{id}', 'UserController@edit')->name('users/edit');
+    Route::post('/edit/{id}', 'UserController@update')->name('users/edit');
+    Route::get('/show/{id}', 'UserController@show')->name('users/show');
     Route::get('/delete/{id}', 'UserController@destroy')->name('users/delete');
     Route::get('users/profile', 'UserController@editProfile')->name('users/profile');
-    Route::post('/edit/{id}', 'UserController@update')->name('users/edit');
+
 });
 
 Route::prefix('courses')->group(function(){

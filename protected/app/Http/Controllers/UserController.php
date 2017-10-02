@@ -6,7 +6,10 @@ use Request as DataRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\User;
+use Validator;
+use Carbon\Carbon;
 use Yajra\DataTables\Facades\DataTables;
+use App\Http\Controllers\Controller;
 use Auth;
 
 
@@ -51,7 +54,32 @@ class UserController extends Controller{
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'user_type' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+        $user = User::create([
+           'first_name' => $request->first_name,
+           'last_name' =>$request->last_name,
+           'email' =>$request->email,
+           'password'=>bcrypt($request->password),
+           'status'=> false,
+           'type'=> $request->user_type,
+           'activation_key'=>'',
+           'last_login'=>Carbon::now(),
+        ]);
+        if ($request->ajax()) {
+            return response()->json([
+                  'success' => true,
+                  'message' => "User was created successifully"
+                ]);
+          }
+       return redirect()->route('users');
+
     }
 
      /**
@@ -75,10 +103,12 @@ class UserController extends Controller{
        if(DataRequest::ajax()){
 
         $response = response()->json([
+               'id' => $user->id,
                'first_name' => $user->first_name,
                'last_name' => $user->last_name,
                'email' => $user->email,
-               'id' => $user->id
+               'type' => $user->type,
+               'status' => $user->status
              ]);
          return $response;
        }
@@ -93,6 +123,19 @@ class UserController extends Controller{
     public function show($id)
     {
        $user = User::find($id);
+
+       if(DataRequest::ajax()){
+
+        $response = response()->json([
+               'id' => $user->id,
+               'first_name' => $user->first_name,
+               'last_name' => $user->last_name,
+               'email' => $user->email,
+               'type' => $user->type,
+               'status' => $user->status
+             ]);
+         return $response;
+       }
        return view('pages.users.show', compact('user'));
     }
 
