@@ -62,7 +62,7 @@ Users
                     <div class="modal-body">
                       <p>You are about to Delete</p>
                       <h3 id="user-to-delete"></h3>
-                      <p>Do you still want to delete?</p>
+                      <p>Do you still want to continue?</p>
                       <input type="hidden" class="form-control" name="deleted_user_id" id="deleted-user-id" value="" required autofocus>
                     </div>
                     <div class="modal-footer">
@@ -84,9 +84,8 @@ Users
                     <h4 class="modal-title">Add New User</h4>
                   </div>
                   <div class="modal-body">
-                         {{ csrf_field() }}
-                         @include('pages.users.add-new-user-form')
-
+                       {{ csrf_field() }}
+                       @include('pages.users.add-new-user-form')
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
@@ -206,9 +205,9 @@ Users
 
     });
 
-  // Launch Edit row
-  function editRow(id) {
-      if ( 'undefined' != typeof id ) {
+    // Launch Edit row
+    function editRow(id) {
+        if ( 'undefined' != typeof id ) {
         $.getJSON(
               '{{url("users/edit")}}/'+ id,
                function(obj) {
@@ -230,23 +229,17 @@ Users
     // Remove row
     function removeRow(id) {
       if ( 'undefined' != typeof id ) {
-
          $.getJSON(
-               '{{url("users/edit")}}/'+ id,
+               '{{url("users/show")}}/'+ id,
                 function(obj) {
-                   console.log(obj);
+                   //console.log(obj);
                    $('#deleted-user-id').val(obj.id);
-                   $('#user-to-delete').html(obj.first_name +' '+obj.last_name);
+                   $('#user-to-delete').html(obj.first_name +' '+obj.last_name + ' ('+ obj.type +')');
                    $('#delete-user-modal').modal('show');
                 })
                 .fail(function() {
                   alert('Unable to fetch data, please try again later.')
                 });
-
-
-
-
-
       } else alert('Unknown row id.');
     }
 
